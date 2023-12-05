@@ -10,73 +10,73 @@ class SayfaA extends StatefulWidget {
 }
 
 class _SayfaAState extends State<SayfaA> {
-  String _inputText = "";
-  List<String> _checkedItems = [];
+  TextEditingController textEditingController = TextEditingController();
+  List<ChecklistItem> checklistItems = [];
 
 
   @override
   Widget build(BuildContext context) {
-    String item;
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Check List"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Enter Text',
-              ),
-              onChanged: (text) {
-                setState(() {
-                  _inputText = text;
-                });
-              },
+            Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: textEditingController,
+                    decoration: InputDecoration(
+                      hintText: 'Öge ekle',
+                    ),
+                ),
             ),
 
             ElevatedButton(
-              child: Text('List'),
-              onPressed: _generateCheckList,
+                onPressed: (){
+                  setState(() {
+                    String newItemText = textEditingController.text;
+                    if(newItemText.isNotEmpty) {
+                      checklistItems.add(ChecklistItem(text: newItemText));
+                      textEditingController.clear();
+                    }
+                  });
+                },
+                child: Text('Ekle'),
             ),
-
-            ListView(
-              children: _checkedItems.map((item) => CheckboxListTile(
-                  value: _checkedItems.contains(item),
-                  onChanged: (value) {
-                    setState(() {
-                      if (value != null) {
-                        _checkedItems.add(item);
-                      } else {
-                        _checkedItems.remove(item);
-                      }
-                    });
-                  },
-                  title: Text(item))).toList(),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: checklistItems.length,
+                    itemBuilder: (context, index) {
+                      return CheckboxListTile(
+                          title: Text(checklistItems[index].text),
+                          value: checklistItems[index].isChecked,
+                          onChanged: (value) {
+                            checklistItems[index].isChecked = value!;
+                          });
+                    },
+                )
             ),
 
             ElevatedButton(
               child: Text("Sayfa B'ye git"),
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => SayfaB()));
-
               },
             ),
+
           ],
         ),
-      ),
-    );
-  }
-
-  void _generateCheckList() {
-    if (_inputText != null) {
-      _checkedItems.clear();
-      _inputText.split(" ").forEach((item) {
-        _checkedItems.add(item);
-      });
+     );
     }
   }
-}
+
+
+  class ChecklistItem {
+    String text;
+    bool isChecked;
+
+    ChecklistItem({required this.text, this.isChecked = false});
+  }
