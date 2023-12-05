@@ -9,6 +9,7 @@ class SayfaB extends StatefulWidget {
 }
 
 class _SayfaBState extends State<SayfaB> {
+
   @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -71,18 +72,24 @@ class _SayfaBState extends State<SayfaB> {
                 children: [
                   CheckboxListTile(
                     title: Text('Madde 1'),
-                    value: true,
+                    value: false,
                     onChanged: (value) {
-                      setState(() {});
+                      setState(() {
+                        value = true;
+                      });
                     },
                   ),
                   CheckboxListTile(
                     title: Text('Madde 2'),
                     value: false,
                     onChanged: (value) {
-                      setState(() {});
+                      if(value != null) {
+                        setState(() {
+                          value = true;
+                        });
+                      }
                     },
-                  ),
+                   ),
                   CheckboxListTile(
                     title: Text('Madde 3'),
                     value: true,
