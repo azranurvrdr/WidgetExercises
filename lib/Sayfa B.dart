@@ -12,13 +12,87 @@ class _SayfaBState extends State<SayfaB> {
   @override
     Widget build(BuildContext context) {
       return Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Menü',
+                    style:
+                    TextStyle(
+                        fontSize: 40,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                  decoration: BoxDecoration(
+                    color: Colors.pinkAccent.shade100,
+                  ),
+              ),
+              ElevatedButton(
+                child: Text('AnaSayfa'),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AnaSayfa(title: 'Ana Sayfa'))
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+                ),
+              ),
+              ElevatedButton(
+                child: Text('Sayfa A'),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AnaSayfa(title: 'Madde Ekleme Sayfası'))
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+
         appBar: AppBar(
-          title: Text("Sayfa B"),
+          title: Text("Sayfa B list"),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
+              // Checkbox list starts here
+              ListView(
+                shrinkWrap: true,
+                children: [
+                  CheckboxListTile(
+                    title: Text('Madde 1'),
+                    value: true,
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Madde 2'),
+                    value: false,
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text('Madde 3'),
+                    value: true,
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
+              // Checkbox list ends here
               ElevatedButton(
                 child: Text("Anasayfaya Dön"),
                 onPressed: (){
