@@ -74,9 +74,11 @@ class _SayfaBState extends State<SayfaB> {
                     title: Text('Madde 1'),
                     value: false,
                     onChanged: (value) {
+                      if(value != null) {
                       setState(() {
                         value = true;
                       });
+                    }
                     },
                   ),
                   CheckboxListTile(
@@ -92,9 +94,13 @@ class _SayfaBState extends State<SayfaB> {
                    ),
                   CheckboxListTile(
                     title: Text('Madde 3'),
-                    value: true,
+                    value: false,
                     onChanged: (value) {
-                      setState(() {});
+                      if(value != null) {
+                        setState(() {
+                          value = true;
+                        });
+                      }
                     },
                   ),
                 ],

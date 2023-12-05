@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widget/Sayfa%20B.dart';
+import 'package:widget/main.dart';
 
 
 class SayfaA extends StatefulWidget {
@@ -18,6 +19,53 @@ class _SayfaAState extends State<SayfaA> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Menü',
+                  style:
+                  TextStyle(
+                      fontSize: 40,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.pinkAccent.shade100,
+              ),
+            ),
+
+            ElevatedButton(
+              child: Text('Anasayfa'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AnaSayfa(title: 'AnaSayfa'))
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Sayfa B'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SayfaB())
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+
       appBar: AppBar(
         title: Text("Check List"),
       ),

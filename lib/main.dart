@@ -34,6 +34,52 @@ class AnaSayfa extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Menü',
+                  style:
+                  TextStyle(
+                      fontSize: 40,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.pinkAccent.shade100,
+              ),
+            ),
+
+            ElevatedButton(
+              child: Text('Sayfa A'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SayfaA())
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Sayfa B'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SayfaB())
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.pink.shade50),
+              ),
+            ),
+          ],
+        ),
+      ),
+
       appBar: AppBar(
 
         title: Text(title),
